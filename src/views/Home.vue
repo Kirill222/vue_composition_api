@@ -1,48 +1,30 @@
 <template>
   <div class="home">
     <h1>Home</h1> 
-    <input type="text" v-model="search">
-    <p>Search term - {{search}}</p>
-    <div v-for="name in matchingNames" :key="name">
-      {{name}}
-    </div>
-    <button @click="handleClick">Stop watch</button> 
+   <PostList :posts="posts" />
   </div>
 </template>
 
 <script>
-import { ref, computed } from '@vue/reactivity'
-import { watch, watchEffect } from '@vue/runtime-core'
+import PostList from '../components/PostList.vue'
+import { ref } from '@vue/reactivity'
 
 export default {
   name: 'Home',  
+  components:{
+    PostList
+  },
   setup() {
-    const names = ref(['AAA', 'BBB', 'CCC', 'DDD', 'EEE'])     
-    const search = ref('')
-
-    //runs each time a certain value changes
-    const stopWatch = watch(search, () => {
-      console.log("Watch function ran")
-    })
-
-    //runs initially when the component first loads
-    //but also it runs whenever any value inside it changes
-    //this is more preferable than whatch
-    const stopWatchEffect = watchEffect(() => {
-      console.log("Watch effect function ran", search.value)
-    })
-
-    const handleClick = () => {
-      stopWatch()
-      stopWatchEffect()
-    }
-
-    const matchingNames = computed(() => {
-      return names.value.filter(n => n.includes(search.value) )  
-    })
-
-
-      return {names, search, matchingNames, handleClick}
+    
+    const posts = ref([
+      {title: 'Hello everyone', body: 'lorem ipfhfgh fgh fgh hretyweteywet wet wet e ert ert ert dfg sfg wertwert fg dfg dfg ete edrg dfg dfg dfg dfg dfg dfg dfg dfg dfg dfg dgdgdfg dfg dfg dfg dfg dfg dfgd fg dfg dfg dffg dfgdfg dfg dfg df gdfg df gsum', id: 1},
+      {title: 'Hi there', body: 'lorem ipsum2', id: 2},
+    ])
+    
+      return {posts}
     } 
 }
+
+
 </script>
+
