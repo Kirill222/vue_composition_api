@@ -1,39 +1,36 @@
 <template>
   <div class="home">
-    <h1>Home</h1>  
-    <p>Name : {{name}}</p>
-    <p>Age: {{age}}</p>
+    <h1>Home</h1> 
+    <h2>Refs</h2> 
+    <p>{{personOne.name}}----------------{{personOne.age}}</p>
+    <button @click="updatedPersonOne">Update person one</button>
 
-    <input type="text" v-model="name">
+    <h2>Reactive</h2>
+    <p>{{personTwo.name}}----------------{{personTwo.age}}</p>
+    <button @click="updatedPersonTwo">Update person two</button>
 
-    <button @click="handleClick">Click</button>
-    <button @click="age++">Age</button>
+
+
+    
   </div>
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { ref, reactive } from '@vue/reactivity'
 
 export default {
   name: 'Home',  
   setup() {
-    //these values are not reactive
-    // let name = 'mario'
-    // let age = 30
+      const personOne = ref({name: 'AAA', age: 555})
+      const personTwo = reactive({name: 'BBB', age: 500}) //reactive cannot work with primitive types data
 
-    //reactive values
-    let name = ref('mario')
-    let age = ref(30)
-
-
-
-    const p = ref(null)
-
-    const handleClick = () => {
-      name.value = "ttt"
-      age.value = 999
-    }    
-    return {name, age, handleClick, p}
-  },
+      const updatedPersonOne = () => {
+        personOne.value.age = 101010
+      }
+       const updatedPersonTwo = () => {
+        personTwo.age = 800
+      }
+      return {personOne, personTwo, updatedPersonOne, updatedPersonTwo}
+    } 
 }
 </script>
