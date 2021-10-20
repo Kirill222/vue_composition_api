@@ -26,6 +26,7 @@
 <script>
 
 import { ref } from '@vue/reactivity'
+import { useRouter } from 'vue-router'
 
 export default {
     setup() {
@@ -34,6 +35,10 @@ export default {
         const body = ref('')
         const tag = ref('')
         const tags = ref([])
+
+        const router = useRouter()
+        // router.go(-1)
+        // router.go(1)
 
         const handleKeydown = () => {
 
@@ -58,7 +63,8 @@ export default {
                     method: 'POST',
                     headers: {"Content-Type": "application/json"},
                     body: JSON.stringify(newPost)
-            })
+                })
+                router.push({name: 'Home'})
             } 
             catch (err) {
                 console.log(err.message)
