@@ -1,0 +1,24 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "title": "First blog",
+            "body": "lorem100sdf sdf sdf ;sldfk sdf sdf sdfsdf ksdf sdf ksdf skdf kwerrwme r ksdf aerdkqr dsf kadea,we  asd aw eqw",
+            "tags": [
+                "webdev",
+                "codding",
+                "news"
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Second blog",
+            "body": "lorem100sdf sdf sdf ;sldfk sdf sdf sdfsdf ksdf sdf ksdf skdf kwerrwme r ksdf aerdkqr dsf kadea,we  asd aw eqw",
+            "tags": [
+                "webdev",
+                "codding",
+                "news"
+            ]
+        }
+    ]
+}

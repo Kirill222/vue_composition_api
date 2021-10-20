@@ -1,34 +1,44 @@
 <template>
   <div class="home">
     <h1>Home</h1> 
-    <div v-if="isShown">
-      <PostList :posts="posts" />
+    <div v-if="error" style="color: red;">{{error}}</div> 
+    <div v-if="posts.length">
+      <PostList :posts="posts" /> 
     </div>
-   
-   <button @click="isShown = !isShown">toggle posts</button> 
-   <button @click="posts.pop()">delete a post</button>
+    <div v-else>Loading...</div>    
   </div>
 </template>
 
 <script>
 import PostList from '../components/PostList.vue'
 import { ref } from '@vue/reactivity'
+import { onMounted } from '@vue/runtime-core'
 
 export default {
   name: 'Home',  
-  components:{
-    PostList
-  },
-  setup() {
-    
-    const posts = ref([
-      {title: 'Hello everyone', body: 'lorem ipfhfgh fgh fgh hretyweteywet wet wet e ert ert ert dfg sfg wertwert fg dfg dfg ete edrg dfg dfg dfg dfg dfg dfg dfg dfg dfg dfg dgdgdfg dfg dfg dfg dfg dfg dfgd fg dfg dfg dffg dfgdfg dfg dfg df gdfg df gsum', id: 1},
-      {title: 'Hi there', body: 'lorem ipsum2', id: 2},
-    ])
+  components: { PostList },
+  setup() {    
+    const posts = ref([])
+    const error = ref(null)
 
-    let isShown = ref(false)    
+    const load = async () => {
+      try {
+        let data = await fetch('http://localhost:3000/posts')
+        if (!data.ok) {
+          throw new Error("Data could not be fetched")
+        }
+
+        posts.value = await data.json()
+      } 
+      catch (err) {
+        console.log(err.message)
+        error.value = err.message
+      }
+    } 
     
-      return {posts, isShown}
+    load()
+
+    return {posts, error}
     } 
 }
 
