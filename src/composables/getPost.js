@@ -4,14 +4,8 @@ const getPost = (id) => {
     const post = ref(null)
     const error = ref(null)
 
-    const load = async () => {
-
-        //simulate delay to show loading window
-        await new Promise(resolve => {
-            setTimeout(resolve, 2000)
-        })
-
-
+    const load = async () => {  
+      
       try {
         let data = await fetch(`http://localhost:3000/posts/${id}`)
         if (!data.ok) {
