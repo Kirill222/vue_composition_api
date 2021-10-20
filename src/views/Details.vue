@@ -4,13 +4,18 @@
       <h3>{{post.title}}</h3>
       <p class="pre">{{post.body}}</p>
   </div>
-  <p v-else style="color: red;">{{error}}</p>
+  <div v-else>
+      <Spinner />
+  </div>
 </template>
 
 <script>
 import getPost from '../composables/getPost.js'
+import Spinner from '../components/Spinner.vue'
+
 export default {
     props: ['id'],
+    components: {Spinner},
     setup(props) {
         const {post, error, load} = getPost(props.id)
 
