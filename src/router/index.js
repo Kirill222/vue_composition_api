@@ -27,6 +27,7 @@ const routes = [
     path: '/tags/:tag',
     name: 'Tag',
     component: Tag,
+    props: true
   }
 ]
 
