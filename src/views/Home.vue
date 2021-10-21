@@ -25,6 +25,8 @@ export default {
     
     load()
 
+    console.log(posts)
+
     return {posts, error}
 
     } 

@@ -5,9 +5,16 @@
     </router-link>
     
     <p>{{snippet}}</p>
+    
     <span v-for="tag in post.tags" :key="tag">
-        #{{tag}}
+        <router-link :to="{name: 'Tag', params: {tag: tag}}"> 
+            #{{tag}}
+        </router-link>
     </span>
+    
+
+
+    
 </div>
 </template>
 
@@ -18,7 +25,7 @@ export default {
     setup(props) {
         const snippet = computed(() => {
             return props.post.body.substring(0, 30) + '...'
-        })
+        })       
 
         return {snippet}
     }
