@@ -1,4 +1,5 @@
 import { ref } from '@vue/reactivity'
+import {projectFirestore} from '../firebase/config.js'
 
 const getPosts = () => {
     const posts = ref([])
@@ -7,12 +8,16 @@ const getPosts = () => {
     const load = async () => {
 
       try {
-        let data = await fetch('http://localhost:3000/posts')
-        if (!data.ok) {
-          throw new Error("Data could not be fetched")
-        }
+       const res = await projectFirestore.collection('posts').get()
+       console.log(res.docs)
 
-        posts.value = await data.json()
+        posts.value = res.docs.map(doc => {
+          console.log({...doc.data(), id: doc.id})
+          return {
+            ...doc.data(), id: doc.id
+          }
+        })
+
       } 
       catch (err) {
         console.log(err.message)
