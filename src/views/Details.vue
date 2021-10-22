@@ -1,5 +1,6 @@
 <template>
   <h1>Post details</h1>
+  <div v-if="{error}" style="color: red; font-weight: bold">{{error}}</div>
   <div v-if="post" class="post">
       <h3>{{post.title}}</h3>
       <p class="pre">{{post.body}}</p>

@@ -10,11 +10,7 @@
         <router-link :to="{name: 'Tag', params: {tag: tag}}"> 
             #{{tag}}
         </router-link>
-    </span>
-    
-
-
-    
+    </span>     
 </div>
 </template>
 
